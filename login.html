@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .sideheading {
+            color: blue;
+        }
+
+        form {
+            background-color: #fffcfc;
+            box-shadow: 0px 0px 10px rgb(166, 166, 166);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            padding-bottom: 30px;
+            margin-top: 50px;
+            margin-bottom: 100px;
+        }
+
+        input,
+        select {
+            padding: 20px 30px;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(198, 198, 198);
+            width: 300px;
+        }
+        select{
+            width: 340px;
+        }
+        .subbtn {
+            cursor: pointer;
+            width: 345px;
+            background-color: blue;
+            color: white;
+        }
+
+        .text {
+            margin-top: 0px;
+            color: blue;
+        }
+
+        .text:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .content {
+            font-size: 20px;
+            width: 30%;
+        }
+
+        .line {
+            width: 330px;
+            height: 1px;
+            background-color: rgb(147, 146, 146);
+        }
+
+        .createnew {
+            background-color: rgb(102, 166, 7);
+            color: white;
+            /* font-size: 20px; */
+            padding: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .createnew a {
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            padding: 20px;
+        }
+
+        .form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .formlabel{
+            text-align: start;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            width: 100%;
+            margin-left: 10px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-logo">
+            <!-- <img src="assests/logo.png"> -->
+            <h1>Magna</h1>
+        </div>
+        <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#rooms">Rooms</a>
+            <a href="index.html#packages">Packages</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="signup.html">Register</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Book Your Room at Manga</h1>
+        <div class="form">
+            <form id="bookingForm">
+                <input type="email" name="email" placeholder="Enter Email" required />
+                <input type="password" name="password" placeholder="Enter Password" required />
+
+                <div>
+                    <p class="text">forgotten password?</p>
+                </div>
+                <div>
+                    <hr class="line">
+                </div>
+                <!-- Booking Section -->
+                <select name="roomType" required>
+                    <option value="">Select Room Type</option>
+                    <option value="Single">Standard Room</option>
+                    <option value="Double">Deluxe Room</option>
+                    <option value="Deluxe">Family Room</option>
+                    <option value="Deluxe">Executive Suite</option>
+                    <option value="Deluxe">Presidential Suite</option>
+                </select>
+                <input type="number" name="persons" placeholder="Number of Persons" required />
+                <div class="formlabel">Check-in Time</div>
+                <input type="datetime-local" name="checkIn" required />
+                <div class="formlabel">Check-out Time</div>
+                <input type="datetime-local" name="checkOut" required />
+
+                <input type="submit" class="subbtn" value="Book Room" />
+                
+                <div>
+                    <hr class="line">
+                </div>
+                <div class="createnew">
+                    <a href="signup.html"> Create New Account </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("bookingForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch("/login-book", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                alert(result.message); // Show success or error
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong. Try again later.");
+            }
+        });
+    </script>
+
+    <footer class="footer">
+        <p>© 2025 Magna Hotel. All rights reserved. | <a href="#"> Privacy Policy </a> | <a href="#"> Terms </a></p>
+    </footer>
+</body>
+
+</html>
