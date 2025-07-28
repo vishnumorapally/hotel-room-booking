@@ -15,7 +15,7 @@ app.get("/login",(req,res)=>{
     res.sendFile(path.join(__dirname,"login.html"))
 })
 
-mongoose.connect("mongodb+srv://vishnu:vishnu12345@cluster0.7qkvmrq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",)
+mongoose.connect("mongodb+srv://tejabathini70:12345@cluster0.ubvjdii.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",)
 const db = mongoose.connection
 
 
@@ -51,10 +51,10 @@ app.post("/post", async (req, res) => {
         await user.save();
         console.log("User saved:", user);
 
-        res.redirect("/login"); // ✅ Only this response is sent
+        res.redirect("/login"); 
     } catch (err) {
         console.error("Registration error:", err);
-        res.status(500).send("Something went wrong"); // ✅ Make sure only one response is sent
+        res.status(500).send("Something went wrong"); 
     }
 });
 
@@ -67,12 +67,12 @@ const bookingSchema = new mongoose.Schema({
     checkOut: Date
 });
 
-const Booking = mongoose.model("booking", bookingSchema); // ✅ Define this
+const Booking = mongoose.model("booking", bookingSchema); 
 
 
 
 app.post("/login-book", async (req, res) => {
-   const { email, password, roomType, persons, checkIn, checkOut } = req.body;
+   const { email, password, roomType, persons, checkIn, checkOut } = req.body ;
 
 
     try {
